@@ -222,6 +222,27 @@
             transform: translateY(-2px);
             opacity: 0.9;
         }
+
+        /* Image zoom wrapper for screenshots */
+        .image-zoom-wrapper {
+            overflow: hidden;
+            position: relative;
+            height: 280px;
+            width: 100%;
+        }
+
+        .image-zoom-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.5);
+            transform-origin: center 35%; /* zoom focus slightly above center */
+            transition: transform 0.3s ease;
+        }
+
+        .image-overlay:hover .image-zoom-wrapper img {
+            transform: scale(1.6);
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -297,7 +318,7 @@
         <div class="container mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
                 <div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center shadow-lg card-hover counter">
-                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 text-[#B8860B]" data-target="127">0</h3>
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 text-[#B8860B]" data-target="500">0</h3>
                     <p class="text-sm sm:text-base md:text-lg text-gray-700 font-medium">Prodaných nemovitostí</p>
                 </div>
                 <div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center shadow-lg card-hover counter">
@@ -309,8 +330,8 @@
                     <p class="text-sm sm:text-base md:text-lg text-gray-700 font-medium">Dní průměrná doba prodeje</p>
                 </div>
                 <div class="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center shadow-lg card-hover counter">
-                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 text-[#B8860B]" data-target="15">0</h3>
-                    <p class="text-sm sm:text-base md:text-lg text-gray-700 font-medium">Let zkušeností</p>
+                    <h3 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3 text-[#B8860B]" data-target="32">0</h3>
+                    <p class="text-sm sm:text-base md:text-lg text-gray-700 font-medium">Let v oboru</p>
                 </div>
             </div>
         </div>
@@ -340,7 +361,7 @@
                     </h2>
                     <div class="w-20 h-1 bg-[#B8860B] mb-6"></div>
                     <p class="text-lg mb-6 text-gray-700">
-                        S více než 15 lety zkušeností v realitním oboru vám nabízím profesionální a osobní přístup při každém kroku vaší cesty k vysněné nemovitosti.
+                        Nemovitostem se věnuji s krátkou pauzou již od roku 1992. Za svou kariéru jsem úspěšně prodala stovky nemovitostí s průměrem cca 15 nemovitostí ročně.
                     </p>
                     <p class="text-lg mb-6 text-gray-700">
                         Ať už kupujete, prodáváte nebo pronajímáte, můžete se spolehnout, že pro Vaši maximální spokojenost udělám vše, co je v mých silách. Pojďme společně splnit Vaše sny.
@@ -446,78 +467,71 @@
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Portfolio items with zoom effect -->
+                <!-- Portfolio items with zoomed screenshots -->
                 <div class="image-overlay rounded-2xl overflow-hidden shadow-xl card-hover fade-in-up">
-                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3" 
-                         alt="Luxusní vila" 
-                         class="w-full h-80 object-cover">
+                    <div class="image-zoom-wrapper">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/b059f9e5-bd00-4217-ba06-e38209029600/public" 
+                             alt="Rodinný dům" 
+                             class="w-full h-80 object-cover">
+                    </div>
                     <div class="overlay-text">
-                        <h3 class="text-xl font-bold mb-2">Luxusní vila - Praha 6</h3>
-                        <p class="text-sm opacity-90">Prodáno za 32 mil. Kč</p>
-                        <p class="text-sm opacity-90">Doba prodeje: 14 dní</p>
+                        <h3 class="text-xl font-bold mb-2">Rodinný dům s pozemkem</h3>
+                        <p class="text-sm opacity-90">Okres Mladá Boleslav</p>
+                        <p class="text-sm opacity-90">Prodáno nad odhadní cenou</p>
                     </div>
                 </div>
                 
                 <div class="image-overlay rounded-2xl overflow-hidden shadow-xl card-hover fade-in-up" style="animation-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?ixlib=rb-4.0.3" 
-                         alt="Rodinný dům" 
-                         class="w-full h-80 object-cover">
+                    <div class="image-zoom-wrapper">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/556f7186-a3e4-4f3a-b22d-64d6cd8e8b00/public" 
+                             alt="Moderní dům" 
+                             class="w-full h-80 object-cover">
+                    </div>
                     <div class="overlay-text">
-                        <h3 class="text-xl font-bold mb-2">Rodinný dům - Beroun</h3>
-                        <p class="text-sm opacity-90">Prodáno za 8.5 mil. Kč</p>
-                        <p class="text-sm opacity-90">Doba prodeje: 21 dní</p>
+                        <h3 class="text-xl font-bold mb-2">Novostavba RD</h3>
+                        <p class="text-sm opacity-90">Středočeský kraj</p>
+                        <p class="text-sm opacity-90">Doba prodeje: 14 dní</p>
                     </div>
                 </div>
                 
                 <div class="image-overlay rounded-2xl overflow-hidden shadow-xl card-hover fade-in-up" style="animation-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-4.0.3" 
-                         alt="Moderní byt" 
-                         class="w-full h-80 object-cover">
+                    <div class="image-zoom-wrapper">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/93730c9d-0df4-40ad-9b8e-2c564ad7a500/public" 
+                             alt="Dům se zahradou" 
+                             class="w-full h-80 object-cover">
+                    </div>
                     <div class="overlay-text">
-                        <h3 class="text-xl font-bold mb-2">Byt 4+kk - Praha 2</h3>
-                        <p class="text-sm opacity-90">Prodáno za 12.3 mil. Kč</p>
-                        <p class="text-sm opacity-90">Doba prodeje: 18 dní</p>
+                        <h3 class="text-xl font-bold mb-2">Dům po rekonstrukci</h3>
+                        <p class="text-sm opacity-90">Okres Praha-východ</p>
+                        <p class="text-sm opacity-90">Rychlý prodej</p>
                     </div>
                 </div>
                 
                 <div class="image-overlay rounded-2xl overflow-hidden shadow-xl card-hover fade-in-up" style="animation-delay: 0.3s;">
-                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3" 
-                         alt="Historická vila" 
-                         class="w-full h-80 object-cover">
+                    <div class="image-zoom-wrapper">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/6833c38f-bd33-4159-f89e-c2a69c6a4400/public" 
+                             alt="Dům s garáží" 
+                             class="w-full h-80 object-cover">
+                    </div>
                     <div class="overlay-text">
-                        <h3 class="text-xl font-bold mb-2">Historická vila - Karlovy Vary</h3>
-                        <p class="text-sm opacity-90">Prodáno za 45 mil. Kč</p>
-                        <p class="text-sm opacity-90">Doba prodeje: 28 dní</p>
+                        <h3 class="text-xl font-bold mb-2">Rodinný dům 5+1</h3>
+                        <p class="text-sm opacity-90">Mělnicko</p>
+                        <p class="text-sm opacity-90">Úspěšný prodej</p>
                     </div>
                 </div>
                 
                 <div class="image-overlay rounded-2xl overflow-hidden shadow-xl card-hover fade-in-up" style="animation-delay: 0.4s;">
-                    <img src="https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?ixlib=rb-4.0.3" 
-                         alt="Moderní dům" 
-                         class="w-full h-80 object-cover">
+                    <div class="image-zoom-wrapper">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/f85448fa-86c2-435f-3cb2-d710b284cf00/public" 
+                             alt="Městský dům" 
+                             class="w-full h-80 object-cover">
+                    </div>
                     <div class="overlay-text">
-                        <h3 class="text-xl font-bold mb-2">Novostavba - Průhonice</h3>
-                        <p class="text-sm opacity-90">Prodáno za 15.7 mil. Kč</p>
-                        <p class="text-sm opacity-90">Doba prodeje: 10 dní</p>
+                        <h3 class="text-xl font-bold mb-2">Řadový dům</h3>
+                        <p class="text-sm opacity-90">Středočeský kraj</p>
+                        <p class="text-sm opacity-90">Prodáno za rekordní cenu</p>
                     </div>
                 </div>
-                
-                <div class="image-overlay rounded-2xl overflow-hidden shadow-xl card-hover fade-in-up" style="animation-delay: 0.5s;">
-                    <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?ixlib=rb-4.0.3" 
-                         alt="Byt s terasou" 
-                         class="w-full h-80 object-cover">
-                    <div class="overlay-text">
-                        <h3 class="text-xl font-bold mb-2">Penthouse - Praha 7</h3>
-                        <p class="text-sm opacity-90">Prodáno za 22 mil. Kč</p>
-                        <p class="text-sm opacity-90">Doba prodeje: 25 dní</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <button class="bg-[#B8860B] hover:bg-[#9A7209] text-white px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105">
-                    Zobrazit další reference
-                </button>
             </div>
         </div>
     </section>
