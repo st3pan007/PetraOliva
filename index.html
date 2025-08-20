@@ -243,6 +243,225 @@
         .image-overlay:hover .image-zoom-wrapper img {
             transform: scale(1.6);
         }
+
+        /* Homestaging Section with Comparison Gallery */
+        .homestaging {
+            padding: 80px 0;
+            background: #FAFAF5;
+        }
+
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .comparison-showcase {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
+        }
+
+        .comparison-viewer {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 
+                0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06),
+                0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: #000;
+        }
+
+        .comparison-image-wrapper {
+            position: relative;
+            padding-bottom: 66.67%; /* 3:2 aspect ratio for interior photos */
+            overflow: hidden;
+        }
+
+        .image-before,
+        .image-after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            user-select: none;
+        }
+
+        .image-after {
+            clip-path: inset(0 0 0 50%);
+            transition: clip-path 0s;
+        }
+
+        .comparison-viewer.dragging .image-after {
+            transition: none;
+        }
+
+        .comparison-slider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+        }
+
+        .slider-track {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-50%);
+            transition: opacity 0.3s;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 48px;
+            height: 48px;
+            transform: translate(-50%, -50%);
+            background: #B8860B;
+            border-radius: 50%;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 
+                0 0 0 3px rgba(255, 255, 255, 0.5),
+                0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slider-button:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 
+                0 0 0 4px rgba(255, 255, 255, 0.6),
+                0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .slider-button:active {
+            cursor: grabbing;
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        .comparison-labels {
+            position: absolute;
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+
+        .label-before,
+        .label-after {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 100px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            animation: fadeInUp 0.6s 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+        }
+
+        .comparison-thumbnails {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .comparison-thumb {
+            position: relative;
+            aspect-ratio: 3/2;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f3f4f6;
+        }
+
+        .comparison-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .comparison-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                180deg, 
+                transparent 0%, 
+                rgba(0, 0, 0, 0.4) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .comparison-thumb:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-thumb:hover img {
+            transform: scale(1.05);
+        }
+
+        .comparison-thumb:hover .comparison-thumb-overlay {
+            opacity: 1;
+        }
+
+        .comparison-thumb.active {
+            border-color: #B8860B;
+        }
+
+        /* Mobile responsiveness for comparison gallery */
+        @media (max-width: 768px) {
+            .comparison-thumbnails {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 12px;
+            }
+            
+            .comparison-labels {
+                top: 16px;
+                left: 16px;
+                right: 16px;
+            }
+            
+            .label-before,
+            .label-after {
+                padding: 6px 16px;
+                font-size: 0.75rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -266,6 +485,7 @@
                     <a href="#home" class="nav-item text-gray-700 hover:text-[#B8860B] transition font-medium text-sm lg:text-base">Domů</a>
                     <a href="#about" class="nav-item text-gray-700 hover:text-[#B8860B] transition font-medium text-sm lg:text-base">O mně</a>
                     <a href="#services" class="nav-item text-gray-700 hover:text-[#B8860B] transition font-medium text-sm lg:text-base">Služby</a>
+                    <a href="#homestaging" class="nav-item text-gray-700 hover:text-[#B8860B] transition font-medium text-sm lg:text-base">Homestaging</a>
                     <a href="#contact" class="bg-[#B8860B] hover:bg-[#9A7209] text-white px-4 lg:px-6 py-2 lg:py-2.5 rounded-lg font-semibold transition transform hover:scale-105 text-sm lg:text-base">
                         Nezávazná konzultace
                     </a>
@@ -447,12 +667,23 @@
                     <div class="bg-white p-8 rounded-2xl text-center card-hover fade-in-up shadow-lg" style="animation-delay: 0.3s;">
                         <div class="w-20 h-20 bg-[#B8860B]/10 rounded-full flex items-center justify-center mx-auto mb-6">
                             <svg class="w-10 h-10 text-[#B8860B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 22V12h6v10"></path>
                             </svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-[#1B4F2C]">Poradenství</h3>
-                        <p class="text-gray-600">Odborné konzultace a tržní odhady pro správná rozhodnutí</p>
+                        <h3 class="text-2xl font-bold mb-3 text-[#1B4F2C]">Homestaging</h3>
+                        <p class="text-gray-600">Profesionální příprava nemovitosti pro rychlý a výhodný prodej</p>
                     </div>
+                </div>
+                
+                <div class="mt-8 bg-white p-8 rounded-2xl text-center card-hover fade-in-up shadow-lg max-w-2xl mx-auto">
+                    <div class="w-20 h-20 bg-[#B8860B]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-[#B8860B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-[#1B4F2C]">Poradenství</h3>
+                    <p class="text-gray-600">Odborné konzultace a tržní odhady pro správná rozhodnutí. Pomohu vám zorientovat se na realitním trhu a najít nejlepší řešení pro vaši situaci.</p>
                 </div>
             </div>
         </div>
@@ -532,6 +763,70 @@
                         <p class="text-sm opacity-90">Prodáno za rekordní cenu</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Homestaging Section -->
+    <section class="homestaging" id="homestaging">
+        <div class="comparison-container">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-[#1B4F2C]">Homestaging</h2>
+                <p class="text-xl text-gray-700">Profesionální příprava nemovitostí pro úspěšný prodej</p>
+            </div>
+            
+            <div class="comparison-gallery">
+                <!-- Hlavní showcase -->
+                <div class="comparison-showcase" data-comparison="homestaging">
+                    <div class="comparison-viewer">
+                        <div class="comparison-image-wrapper">
+                            <img class="image-before" src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/1b91835f-2594-4499-4a8d-44f132e99100/public" alt="Před">
+                            <img class="image-after" src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/7cab72fd-3a57-493f-6a87-27120ca0ba00/public" alt="Po">
+                        </div>
+                        <div class="comparison-slider">
+                            <div class="slider-track"></div>
+                            <div class="slider-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24">
+                                    <path d="M8 9l-3 3 3 3M16 9l3 3-3 3" stroke="currentColor" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="comparison-labels">
+                            <span class="label-before">PŘED</span>
+                            <span class="label-after">PO</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Thumbnails grid -->
+                <div class="comparison-thumbnails">
+                    <button class="comparison-thumb active" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/1b91835f-2594-4499-4a8d-44f132e99100/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/7cab72fd-3a57-493f-6a87-27120ca0ba00/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/7cab72fd-3a57-493f-6a87-27120ca0ba00/public" alt="Obývací pokoj">
+                        <div class="comparison-thumb-overlay"></div>
+                    </button>
+                    <button class="comparison-thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/63f24ed8-6c4d-4692-3ad6-72e86dca8900/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/825e2251-6a84-4336-7a43-3d0d53ee4800/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/825e2251-6a84-4336-7a43-3d0d53ee4800/public" alt="Ložnice">
+                        <div class="comparison-thumb-overlay"></div>
+                    </button>
+                    <button class="comparison-thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/967c22e3-4317-4584-b0dc-8a202171ed00/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/95e757fa-397d-4ccd-93f9-8e0b4efb0f00/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/95e757fa-397d-4ccd-93f9-8e0b4efb0f00/public" alt="Kuchyně">
+                        <div class="comparison-thumb-overlay"></div>
+                    </button>
+                    <button class="comparison-thumb" data-before="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/3867a075-891a-4c51-8f85-ffff0eace500/public" data-after="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/adf369fd-b166-4ca9-a301-bf6c3db15b00/public">
+                        <img src="https://imagedelivery.net/2OhTeUm5dT07PSQroFepFw/adf369fd-b166-4ca9-a301-bf6c3db15b00/public" alt="Jídelna">
+                        <div class="comparison-thumb-overlay"></div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 fade-in-up">
+                <p class="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
+                    Homestaging výrazně zvyšuje atraktivitu nemovitosti a zkracuje dobu prodeje. 
+                    Profesionálně připravená nemovitost se prodá v průměru o 30% rychleji a často za vyšší cenu.
+                </p>
+                <a href="#contact" class="bg-[#B8860B] hover:bg-[#9A7209] text-white px-8 py-3 rounded-lg font-semibold transition transform hover:scale-105 inline-block">
+                    Mám zájem o homestaging
+                </a>
             </div>
         </div>
     </section>
@@ -766,6 +1061,7 @@
                         <li><a href="#home" class="hover:text-[#B8860B] transition">Domů</a></li>
                         <li><a href="#about" class="hover:text-[#B8860B] transition">O mně</a></li>
                         <li><a href="#services" class="hover:text-[#B8860B] transition">Služby</a></li>
+                        <li><a href="#homestaging" class="hover:text-[#B8860B] transition">Homestaging</a></li>
                         <li><a href="#contact" class="hover:text-[#B8860B] transition">Kontakt</a></li>
                     </ul>
                 </div>
@@ -825,6 +1121,7 @@
                     <a href="#home" class="block text-xl font-semibold text-gray-800 hover:text-[#B8860B] transition">Domů</a>
                     <a href="#about" class="block text-xl font-semibold text-gray-800 hover:text-[#B8860B] transition">O mně</a>
                     <a href="#services" class="block text-xl font-semibold text-gray-800 hover:text-[#B8860B] transition">Služby</a>
+                    <a href="#homestaging" class="block text-xl font-semibold text-gray-800 hover:text-[#B8860B] transition">Homestaging</a>
                     <a href="#contact" class="block text-lg font-semibold bg-[#B8860B] text-white px-6 py-3 rounded-lg text-center hover:bg-[#9A7209] transition">Nezávazná konzultace</a>
                 </div>
             </div>
@@ -902,6 +1199,108 @@
         
         counters.forEach(counter => {
             counterObserver.observe(counter);
+        });
+
+        // Comparison Gallery Class for Homestaging
+        class ComparisonGallery {
+            constructor(sectionSelector) {
+                this.section = document.querySelector(sectionSelector);
+                if (!this.section) return;
+                
+                this.viewer = this.section.querySelector('.comparison-viewer');
+                this.imageAfter = this.section.querySelector('.image-after');
+                this.slider = this.section.querySelector('.comparison-slider');
+                this.sliderButton = this.section.querySelector('.slider-button');
+                this.thumbnails = this.section.querySelectorAll('.comparison-thumb');
+                
+                this.isDragging = false;
+                this.currentX = 50;
+                
+                this.init();
+            }
+            
+            init() {
+                // Desktop events
+                this.sliderButton.addEventListener('mousedown', this.startDrag.bind(this));
+                document.addEventListener('mousemove', this.drag.bind(this));
+                document.addEventListener('mouseup', this.endDrag.bind(this));
+                
+                // Touch events
+                this.sliderButton.addEventListener('touchstart', this.startDrag.bind(this), {passive: true});
+                document.addEventListener('touchmove', this.drag.bind(this), {passive: true});
+                document.addEventListener('touchend', this.endDrag.bind(this));
+                
+                // Thumbnails
+                this.thumbnails.forEach(thumb => {
+                    thumb.addEventListener('click', this.switchImages.bind(this));
+                });
+                
+                // Keyboard support
+                document.addEventListener('keydown', this.handleKeyboard.bind(this));
+            }
+            
+            startDrag(e) {
+                this.isDragging = true;
+                this.viewer.classList.add('dragging');
+                e.preventDefault();
+            }
+            
+            drag(e) {
+                if (!this.isDragging) return;
+                
+                const rect = this.viewer.getBoundingClientRect();
+                const x = (e.type.includes('touch')) ? e.touches[0].clientX : e.clientX;
+                const position = ((x - rect.left) / rect.width) * 100;
+                
+                this.updatePosition(Math.max(0, Math.min(100, position)));
+            }
+            
+            endDrag() {
+                this.isDragging = false;
+                this.viewer.classList.remove('dragging');
+            }
+            
+            updatePosition(position) {
+                this.currentX = position;
+                this.imageAfter.style.clipPath = `inset(0 0 0 ${position}%)`;
+                this.slider.style.left = `${position}%`;
+            }
+            
+            switchImages(e) {
+                const thumb = e.currentTarget;
+                const beforeSrc = thumb.dataset.before;
+                const afterSrc = thumb.dataset.after;
+                
+                // Update active state
+                this.thumbnails.forEach(t => t.classList.remove('active'));
+                thumb.classList.add('active');
+                
+                // Reset slider to center
+                this.updatePosition(50);
+                
+                // Smooth transition
+                this.viewer.style.opacity = '0.8';
+                
+                setTimeout(() => {
+                    this.section.querySelector('.image-before').src = beforeSrc;
+                    this.section.querySelector('.image-after').src = afterSrc;
+                    this.viewer.style.opacity = '1';
+                }, 150);
+            }
+            
+            handleKeyboard(e) {
+                if (!this.isDragging) return;
+                if (e.key === 'ArrowLeft') {
+                    this.updatePosition(Math.max(0, this.currentX - 5));
+                } else if (e.key === 'ArrowRight') {
+                    this.updatePosition(Math.min(100, this.currentX + 5));
+                }
+            }
+        }
+
+        // Initialize Homestaging Gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            new ComparisonGallery('.homestaging');
         });
     </script>
 </body>
