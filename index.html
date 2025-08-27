@@ -258,6 +258,16 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        /* Video switcher styles */
+        .video-switch-btn {
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .video-switch-btn.active {
+            border-color: transparent;
+        }
+
         /* Homestaging Section with Comparison Gallery */
         .homestaging {
             padding: 80px 0;
@@ -660,7 +670,7 @@
                         Aktuálně k prodeji
                     </h2>
                     <p class="text-lg sm:text-xl text-gray-700 md:text-gray-200 fade-in-up">
-                        Čerstvá nabídka - prohlédněte si detaily ve videu
+                        Čerstvé nabídky - prohlédněte si detaily ve videích
                     </p>
                 </div>
                 
@@ -668,17 +678,41 @@
                 <div class="relative max-w-sm mx-auto md:max-w-md fade-in-up" style="animation-delay: 0.2s;">
                     <!-- NOVINKA Badge -->
                     <div class="absolute -top-3 -right-3 bg-[#B8860B] text-white px-4 py-2 rounded-full text-sm font-bold z-10 shadow-lg pulse-animation">
-                        NOVINKA
+                        2 NOVINKY
                     </div>
-                    <!-- Video with shadow for desktop -->
-                    <div class="rounded-2xl overflow-hidden shadow-2xl bg-black md:shadow-[0_0_50px_rgba(0,0,0,0.5)]" style="position: relative; padding-top: 177.77777777777777%;">
-                        <iframe
-                            src="https://customer-go903c29r7kfmooj.cloudflarestream.com/e7efa82e1a419081909c0c528ad789d0/iframe?poster=https%3A%2F%2Fcustomer-go903c29r7kfmooj.cloudflarestream.com%2Fe7efa82e1a419081909c0c528ad789d0%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
-                            loading="lazy"
-                            style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
-                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                            allowfullscreen="true"
-                        ></iframe>
+                    
+                    <!-- Video Switcher Buttons -->
+                    <div class="flex justify-center gap-2 mb-4">
+                        <button onclick="switchVideo(0)" class="video-switch-btn active px-4 py-2 bg-[#B8860B] text-white rounded-lg text-sm font-medium transition-all">
+                            Nemovitost 1
+                        </button>
+                        <button onclick="switchVideo(1)" class="video-switch-btn px-4 py-2 bg-white/20 md:bg-black/20 text-gray-700 md:text-white rounded-lg text-sm font-medium transition-all hover:bg-white/30 md:hover:bg-black/30">
+                            Nemovitost 2
+                        </button>
+                    </div>
+                    
+                    <!-- Videos Container -->
+                    <div class="rounded-2xl overflow-hidden shadow-2xl bg-black md:shadow-[0_0_50px_rgba(0,0,0,0.5)] relative">
+                        <!-- Video 1 -->
+                        <div class="video-item active" style="position: relative; padding-top: 177.77777777777777%;">
+                            <iframe
+                                src="https://customer-go903c29r7kfmooj.cloudflarestream.com/e7efa82e1a419081909c0c528ad789d0/iframe?poster=https%3A%2F%2Fcustomer-go903c29r7kfmooj.cloudflarestream.com%2Fe7efa82e1a419081909c0c528ad789d0%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+                                loading="lazy"
+                                style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
+                                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                allowfullscreen="true"
+                            ></iframe>
+                        </div>
+                        <!-- Video 2 -->
+                        <div class="video-item" style="position: relative; padding-top: 177.77777777777777%; display: none;">
+                            <iframe
+                                src="https://customer-go903c29r7kfmooj.cloudflarestream.com/29982d8ba45911a14fc3855be41682db/iframe?poster=https%3A%2F%2Fcustomer-go903c29r7kfmooj.cloudflarestream.com%2F29982d8ba45911a14fc3855be41682db%2Fthumbnails%2Fthumbnail.jpg%3Ftime%3D%26height%3D600"
+                                loading="lazy"
+                                style="border: none; position: absolute; top: 0; left: 0; height: 100%; width: 100%;"
+                                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                                allowfullscreen="true"
+                            ></iframe>
+                        </div>
                     </div>
                 </div>
                 
@@ -1371,6 +1405,28 @@
         document.addEventListener('DOMContentLoaded', () => {
             new ComparisonGallery('.homestaging');
         });
+
+        // Video switcher function
+        function switchVideo(index) {
+            // Hide all videos
+            document.querySelectorAll('.video-item').forEach((video, i) => {
+                video.style.display = 'none';
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.video-switch-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-[#B8860B]', 'text-white');
+                btn.classList.add('bg-white/20', 'md:bg-black/20', 'text-gray-700', 'md:text-white');
+            });
+            
+            // Show selected video
+            document.querySelectorAll('.video-item')[index].style.display = 'block';
+            
+            // Add active class to selected button
+            const activeBtn = document.querySelectorAll('.video-switch-btn')[index];
+            activeBtn.classList.remove('bg-white/20', 'md:bg-black/20', 'text-gray-700', 'md:text-white');
+            activeBtn.classList.add('active', 'bg-[#B8860B]', 'text-white');
+        }
     </script>
 </body>
 </html>
